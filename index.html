@@ -19,21 +19,38 @@
         <h1>Paris, France</h1>
         <div class="values">Sunday 1:35 PM</div>
 
-        <form class="my-3">
-          <input type="text" placeholder="Enter a city" />
+        <form class="input-group mx-auto my-3 w-50">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Change the city"
+          />
+          <a class="btn btn-outline-secondary" type="button" id="button-addon2">
+            >
+          </a>
         </form>
 
-        <div>☀️</div>
-        <div class="values">22 <a>°C </a>|<a>°F</a></div>
-        <div>Sunny</div>
+        <div class="row justify-content-center align-items-center">
+          <div class="main-emoji col-2">☀️</div>
+          <div class="col-3">
+            <div class="values">22<a>°C</a>|<a href="#">°F</a></div>
+            <div class="main-weather-description">Sunny</div>
+          </div>
+        </div>
 
-        <div class="mt-2">
-          <span> Precipitation: </span>
-          <span class="values">20%</span>
-          <span> Humidity: </span>
-          <span class="values">20%</span>
-          <span> Wind: </span>
-          <span class="values">20km/h</span>
+        <div class="mt-2 row justify-content-center">
+          <div class="col-3">
+            <span> Precipitation: </span>
+            <span class="values">20%</span>
+          </div>
+          <div class="col-3">
+            <span> Humidity: </span>
+            <span class="values">20%</span>
+          </div>
+          <div class="col-3">
+            <span> Wind: </span>
+            <span class="values">20km/h</span>
+          </div>
         </div>
       </div>
 
