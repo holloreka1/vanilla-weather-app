@@ -1,0 +1,14 @@
+.container.weather-app {
+  max-width: 666px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #dadde1;
+  border-radius: 5px;
+}
+.source-code {
+  text-align: center;
+}
+.values {
+  font-family: monospace;
+  font-size: 1.2em;
+}

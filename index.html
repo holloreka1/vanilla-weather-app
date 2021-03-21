@@ -14,64 +14,66 @@
     <title>Weather App</title>
   </head>
   <body>
-    <div class="container">
-      <div>
+    <div class="container weather-app">
+      <div class="text-center">
         <h1>Paris, France</h1>
-        <div>Sunday 1:35 PM</div>
+        <div class="values">Sunday 1:35 PM</div>
 
-        <form>
+        <form class="my-3">
           <input type="text" placeholder="Enter a city" />
         </form>
 
         <div>☀️</div>
-        <div>22 <a>°C </a>|<a>°F</a></div>
+        <div class="values">22 <a>°C </a>|<a>°F</a></div>
         <div>Sunny</div>
 
-        <div>
-          <span> Precipitation </span>
-          <span>20%</span>
-          <span> Humidity </span>
-          <span>20%</span>
-          <span> Wind </span>
-          <span>20 Km/h</span>
+        <div class="mt-2">
+          <span> Precipitation: </span>
+          <span class="values">20%</span>
+          <span> Humidity: </span>
+          <span class="values">20%</span>
+          <span> Wind: </span>
+          <span class="values">20km/h</span>
         </div>
       </div>
 
-      <div>
+      <div class="text-center mt-4">
         <h2>Forecast</h2>
 
         <div class="row">
-          <div class="col-2">
+          <div class="col">
             <div>Monday</div>
-            <div>22°C/14°C</div>
+            <div class="values">22°C/14°C</div>
             <div>☀️</div>
           </div>
 
-          <div class="col-2">
+          <div class="col">
             <div>Thuesday</div>
-            <div>22°C/14°C</div>
+            <div class="values">22°C/14°C</div>
             <div>☀️</div>
           </div>
 
-          <div class="col-2">
+          <div class="col">
             <div>Wednesday</div>
-            <div>22°C/14°C</div>
+            <div class="values">22°C/14°C</div>
             <div>☀️</div>
           </div>
 
-          <div class="col-2">
+          <div class="col">
             <div>Thursday</div>
-            <div>22°C/14°C</div>
+            <div class="values">22°C/14°C</div>
             <div>☀️</div>
           </div>
 
-          <div class="col-2">
+          <div class="col">
             <div>Friday</div>
-            <div>22°C/14°C</div>
+            <div class="values">22°C/14°C</div>
             <div>☀️</div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="source-code">
       <small>
         <a
           href="https://github.com/holloreka1/vanilla-weather-app"
