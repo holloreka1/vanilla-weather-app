@@ -9,7 +9,7 @@
   font-size: 48px;
 }
 .main-weather-description {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 500;
 }
 .source-code {
@@ -17,5 +17,17 @@
 }
 .values {
   font-family: monospace;
-  font-size: 1.2em;
+  font-size: 1.3em;
+}
+.values a {
+  font-size: 0.8em;
+  color: black;
+  text-decoration: none;
+}
+div h2 {
+  font-size: 1.8em;
+}
+div h2 a {
+  color: black;
+  text-decoration: none;
 }
