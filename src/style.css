@@ -11,6 +11,8 @@
 .main-weather-description {
   font-size: 26px;
   font-weight: 500;
+}
+.main-weather-description::first-letter {
   text-transform: capitalize;
 }
 .source-code {

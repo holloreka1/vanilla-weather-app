@@ -23,7 +23,7 @@
     <div class="container weather-app">
       <div class="text-center">
         <h1 id="city"></h1>
-        <div class="values">Sunday 1:35 PM</div>
+        <div class="values">Last updated: <span id="date"></span></div>
 
         <form class="input-group mx-auto my-3 w-50">
           <input
@@ -46,16 +46,16 @@
 
         <div class="mt-2 row justify-content-center">
           <div class="col-3">
-            <span> Precipitation: </span>
-            <span class="values">20%</span>
+            <span> Pressure: </span>
+            <span id="pressure" class="values"></span>
           </div>
           <div class="col-3">
             <span> Humidity: </span>
-            <span class="values">20%</span>
+            <span id="humidity" class="values"></span>
           </div>
           <div class="col-3">
             <span> Wind: </span>
-            <span class="values">20km/h</span>
+            <span id="wind" class="values"></span>
           </div>
         </div>
       </div>
