@@ -1,8 +1,3 @@
-let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
-let cityName = "Sydney";
-let units = "metric";
-let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
-
 function formatDate(timestamp) {
   //Sunday 13:50
   let date = new Date(timestamp);
@@ -32,8 +27,6 @@ function formatDate(timestamp) {
 }
 
 function fillData(response) {
-  console.log(response.data);
-
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
 
@@ -63,5 +56,10 @@ function fillData(response) {
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
+
+let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
+let cityName = "Sydney";
+let units = "metric";
+let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
 
 axios.get(url).then(fillData);
