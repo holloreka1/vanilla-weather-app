@@ -26,6 +26,15 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function setWeatherIcon(elementId, weather) {
+  let weatherIconElement = document.querySelector(elementId);
+  weatherIconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${weather.icon}@2x.png`
+  );
+  weatherIconElement.setAttribute("alt", weather.main);
+}
+
 function fillData(response) {
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
@@ -55,6 +64,8 @@ function fillData(response) {
 
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  setWeatherIcon("#main-weather-icon", response.data.weather[0]);
 }
 
 let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
