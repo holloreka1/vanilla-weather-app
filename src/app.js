@@ -46,7 +46,6 @@ function setWeatherIcon(elementId, weather) {
 }
 
 function displayForecast(response) {
-  console.log(response);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#collapseForecast");
   let forecastHTML = "";
@@ -77,7 +76,6 @@ function displayForecast(response) {
 }
 
 function getForecast(coord) {
-  console.log(coord);
   let exclude = "current,minutely,hourly,alerts";
   let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=${exclude}&appid=${apiKey}&units=${units}`;
   axios.get(url).then(displayForecast);
