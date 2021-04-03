@@ -23,6 +23,10 @@
   font-size: 0.8em;
   color: black;
   text-decoration: none;
+  cursor: default;
+}
+.values a:hover {
+  color: black;
 }
 .values .selected-unit {
   font-size: 1em;

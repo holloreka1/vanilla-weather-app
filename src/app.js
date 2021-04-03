@@ -39,6 +39,7 @@ function fillData(response) {
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
 
+  temperature = response.data.main.temp;
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
   modifySelection(units);
@@ -88,11 +89,11 @@ function handleSearchSubmit(event) {
 
 function convertTemperature(unit) {
   let temperatureElement = document.querySelector("#temperature");
-  let currentTemperature = temperatureElement.innerHTML;
+  let currentTemperature;
   if ("imperial" === unit) {
-    currentTemperature = Math.round((currentTemperature * 9) / 5 + 32);
+    currentTemperature = Math.round((temperature * 9) / 5 + 32);
   } else {
-    currentTemperature = Math.round(((currentTemperature - 32) * 5) / 9);
+    currentTemperature = Math.round(temperature);
   }
   temperatureElement.innerHTML = currentTemperature;
   modifySelection(unit);
@@ -111,6 +112,7 @@ function handleCelsiusConversion(event) {
 
 let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
 let units = "metric";
+let temperature = null;
 
 // Load default city weather forecast
 search("Madrid");
