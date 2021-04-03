@@ -68,9 +68,25 @@ function fillData(response) {
   setWeatherIcon("#main-weather-icon", response.data.weather[0]);
 }
 
-let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
-let cityName = "Sydney";
-let units = "metric";
-let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
+function search(cityName) {
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
+  axios.get(url).then(fillData);
+}
 
-axios.get(url).then(fillData);
+function handleSearchSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  let newCityName = cityInputElement.value;
+  search(newCityName);
+}
+
+// Start execution
+
+let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
+let units = "metric";
+
+// Load default city weather forecast
+search("Madrid");
+
+let searchFormElement = document.querySelector("#city-search-form");
+searchFormElement.addEventListener("submit", handleSearchSubmit);

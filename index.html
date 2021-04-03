@@ -25,15 +25,20 @@
         <h1 id="city"></h1>
         <div class="values">Last updated: <span id="date"></span></div>
 
-        <form class="input-group mx-auto my-3 w-50">
+        <form id="city-search-form" class="input-group mx-auto my-3 w-50">
           <input
-            type="text"
+            type="search"
+            id="city-input"
             class="form-control"
             placeholder="Change the city"
           />
-          <a class="btn btn-outline-secondary" type="button" id="button-addon2">
+          <button
+            class="btn btn-outline-secondary"
+            type="submit"
+            id="button-addon2"
+          >
             >
-          </a>
+          </button>
         </form>
 
         <div class="row justify-content-center align-items-center">
