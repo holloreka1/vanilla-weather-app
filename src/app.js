@@ -40,14 +40,8 @@ function fillData(response) {
   cityElement.innerHTML = response.data.name;
 
   let temperatureElement = document.querySelector("#temperature");
-  let temperatureSelection;
-  if (units === "metric") {
-    temperatureSelection = `<span>°C</span>|<a href="#">°F</a>`;
-  } else {
-    temperatureSelection = `<span>°F</span>|<a href="#">°C</a>`;
-  }
-  temperatureElement.innerHTML =
-    Math.round(response.data.main.temp) + temperatureSelection;
+  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  modifySelection(units);
 
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.weather[0].description;
@@ -68,6 +62,18 @@ function fillData(response) {
   setWeatherIcon("#main-weather-icon", response.data.weather[0]);
 }
 
+function modifySelection(units) {
+  let fahrenHeitSymbolLink = document.querySelector("#fahrenheit-link");
+  let celsiusSymbolLink = document.querySelector("#celsius-link");
+  if (units === "metric") {
+    celsiusSymbolLink.classList.add("selected-unit");
+    fahrenHeitSymbolLink.classList.remove("selected-unit");
+  } else {
+    fahrenHeitSymbolLink.classList.add("selected-unit");
+    celsiusSymbolLink.classList.remove("selected-unit");
+  }
+}
+
 function search(cityName) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
   axios.get(url).then(fillData);
@@ -80,6 +86,27 @@ function handleSearchSubmit(event) {
   search(newCityName);
 }
 
+function convertTemperature(unit) {
+  let temperatureElement = document.querySelector("#temperature");
+  let currentTemperature = temperatureElement.innerHTML;
+  if ("imperial" === unit) {
+    currentTemperature = Math.round((currentTemperature * 9) / 5 + 32);
+  } else {
+    currentTemperature = Math.round(((currentTemperature - 32) * 5) / 9);
+  }
+  temperatureElement.innerHTML = currentTemperature;
+  modifySelection(unit);
+}
+
+function handleFahrenheitConversion(event) {
+  event.preventDefault();
+  convertTemperature("imperial");
+}
+
+function handleCelsiusConversion(event) {
+  event.preventDefault();
+  convertTemperature("metric");
+}
 // Start execution
 
 let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
@@ -90,3 +117,9 @@ search("Madrid");
 
 let searchFormElement = document.querySelector("#city-search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
+
+let fahrenheitLinkElement = document.querySelector("#fahrenheit-link");
+fahrenheitLinkElement.addEventListener("click", handleFahrenheitConversion);
+
+let celsiusLinkElement = document.querySelector("#celsius-link");
+celsiusLinkElement.addEventListener("click", handleCelsiusConversion);
