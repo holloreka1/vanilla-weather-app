@@ -37,7 +37,12 @@ function setWeatherIcon(elementId, weather) {
 
 function fillData(response) {
   let cityElement = document.querySelector("#city");
+  console.log(response.data);
   cityElement.innerHTML = response.data.name;
+  lat = response.data.coord.lat;
+  lon = response.data.coord.lon;
+  console.log(lat);
+  console.log(lon);
 
   temperature = response.data.main.temp;
   let temperatureElement = document.querySelector("#temperature");
@@ -108,11 +113,35 @@ function handleCelsiusConversion(event) {
   event.preventDefault();
   convertTemperature("metric");
 }
+
+function getForecast() {
+  let forecast = document.querySelector("#collapseForecast");
+  let forecastHTML = "";
+  let days = ["Saturday", "Sunday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col">
+      <div>${day}</div>
+      <div class="values">22°C/14°C</div>
+      <div>☀️</div>
+      </div>
+    </div>
+    `;
+  });
+
+  forecast.innerHTML = forecastHTML;
+}
 // Start execution
 
 let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
 let units = "metric";
+// https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+// https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=91f0b5f6eea9750d66bc243bf6b7b91e
 let temperature = null;
+let lon;
+let lat;
 
 // Load default city weather forecast
 search("Madrid");
@@ -125,3 +154,5 @@ fahrenheitLinkElement.addEventListener("click", handleFahrenheitConversion);
 
 let celsiusLinkElement = document.querySelector("#celsius-link");
 celsiusLinkElement.addEventListener("click", handleCelsiusConversion);
+
+getForecast();
