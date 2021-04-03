@@ -1,4 +1,4 @@
-function formatDate(timestamp) {
+function formatDateDay(timestamp) {
   //Sunday 13:50
   let date = new Date(timestamp);
 
@@ -12,6 +12,13 @@ function formatDate(timestamp) {
     "Saturday",
   ];
   let day = days[date.getDay()];
+  return day;
+}
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+
+  let day = formatDateDay(timestamp);
 
   let hours = date.getHours();
   if (hours < 10) {
@@ -21,6 +28,9 @@ function formatDate(timestamp) {
   let minutes = date.getMinutes();
   if (minutes === 0) {
     minutes = minutes + "0";
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
   }
 
   return `${day} ${hours}:${minutes}`;
@@ -37,23 +47,33 @@ function setWeatherIcon(elementId, weather) {
 
 function displayForecast(response) {
   console.log(response);
-  let forecast = document.querySelector("#collapseForecast");
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#collapseForecast");
   let forecastHTML = "";
-  let days = ["Saturday", "Sunday"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      let nameOfTheDay = new Date(forecastDay.dt * 1000);
+      nameOfTheDay = formatDateDay(nameOfTheDay);
+      let minTemperature = Math.round(forecastDay.temp.min);
+      let maxTemperature = Math.round(forecastDay.temp.max);
+      let imgSource = `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png`;
+      let imgAlt = forecastDay.weather[0].main;
+
+      forecastHTML =
+        forecastHTML +
+        `
     <div class="col">
-      <div>${day}</div>
-      <div class="values">22°C/14°C</div>
-      <div>☀️</div>
+      <div>${nameOfTheDay}</div>
+      <div class="values">${maxTemperature}°C/${minTemperature}°C</div>
+      <img class="small-weather-icon" src=${imgSource} alt=${imgAlt} />
       </div>
     </div>
     `;
+    }
   });
 
-  forecast.innerHTML = forecastHTML;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coord) {

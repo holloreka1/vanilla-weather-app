@@ -12,6 +12,9 @@
 .main-weather-description::first-letter {
   text-transform: capitalize;
 }
+.small-weather-icon {
+  width: 48px;
+}
 .source-code {
   text-align: center;
 }
