@@ -35,14 +35,37 @@ function setWeatherIcon(elementId, weather) {
   weatherIconElement.setAttribute("alt", weather.main);
 }
 
+function displayForecast(response) {
+  console.log(response);
+  let forecast = document.querySelector("#collapseForecast");
+  let forecastHTML = "";
+  let days = ["Saturday", "Sunday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col">
+      <div>${day}</div>
+      <div class="values">22°C/14°C</div>
+      <div>☀️</div>
+      </div>
+    </div>
+    `;
+  });
+
+  forecast.innerHTML = forecastHTML;
+}
+
+function getForecast(coord) {
+  console.log(coord);
+  let exclude = "current,minutely,hourly,alerts";
+  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=${exclude}&appid=${apiKey}&units=${units}`;
+  axios.get(url).then(displayForecast);
+}
+
 function fillData(response) {
   let cityElement = document.querySelector("#city");
-  console.log(response.data);
   cityElement.innerHTML = response.data.name;
-  lat = response.data.coord.lat;
-  lon = response.data.coord.lon;
-  console.log(lat);
-  console.log(lon);
 
   temperature = response.data.main.temp;
   let temperatureElement = document.querySelector("#temperature");
@@ -66,6 +89,8 @@ function fillData(response) {
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
   setWeatherIcon("#main-weather-icon", response.data.weather[0]);
+
+  getForecast(response.data.coord);
 }
 
 function modifySelection(units) {
@@ -114,34 +139,11 @@ function handleCelsiusConversion(event) {
   convertTemperature("metric");
 }
 
-function getForecast() {
-  let forecast = document.querySelector("#collapseForecast");
-  let forecastHTML = "";
-  let days = ["Saturday", "Sunday"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-    <div class="col">
-      <div>${day}</div>
-      <div class="values">22°C/14°C</div>
-      <div>☀️</div>
-      </div>
-    </div>
-    `;
-  });
-
-  forecast.innerHTML = forecastHTML;
-}
 // Start execution
 
 let apiKey = "91f0b5f6eea9750d66bc243bf6b7b91e";
 let units = "metric";
-// https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-// https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=91f0b5f6eea9750d66bc243bf6b7b91e
 let temperature = null;
-let lon;
-let lat;
 
 // Load default city weather forecast
 search("Madrid");
@@ -154,5 +156,3 @@ fahrenheitLinkElement.addEventListener("click", handleFahrenheitConversion);
 
 let celsiusLinkElement = document.querySelector("#celsius-link");
 celsiusLinkElement.addEventListener("click", handleCelsiusConversion);
-
-getForecast();
